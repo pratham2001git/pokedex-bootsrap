@@ -1,9 +1,9 @@
+import arrayShuffle from "array-shuffle";
 import data from "./data.json"  
 import {Pokemon} from "./components/PokemonCard"
-import arrayShuffle from "array-shuffle";
 
 const inputE1 = document.querySelector("input")
-
+const dataRow = document.querySelector("[data-pokemon-row]")
 
 
 // DOM selection
@@ -16,8 +16,9 @@ const inputE1 = document.querySelector("input")
   function renderPokemon(list){
   dataRow.textContent = "";
     list.forEach((pokemonObj) =>{
-      Pokemon(pokemonObj);
-    })
+      const pokemon = Pokemon(pokemonObj);
+      dataRow.appendChild(pokemon)
+    });
   }
 
   function handleSearch(input){
