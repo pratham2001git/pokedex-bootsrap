@@ -1,8 +1,9 @@
 import arrayShuffle from "array-shuffle";
+import Fuse from "fuse.js";
 import data from "./data.json"  
-import {Pokemon} from "./components/PokemonCard"
+import {Pokemon} from "./components/PokemonCard";
 
-const inputE1 = document.querySelector("input")
+const inputEl = document.querySelector("input")
 const dataRow = document.querySelector("[data-pokemon-row]")
 
 
@@ -14,33 +15,53 @@ const dataRow = document.querySelector("[data-pokemon-row]")
 
 
   function renderPokemon(list){
-  dataRow.textContent = "";
-    list.forEach((pokemonObj) =>{
-      const pokemon = Pokemon(pokemonObj);
-      dataRow.appendChild(pokemon)
-    });
+    dataRow.textContent = "";
+    if (!list.length){
+      const pokemon = Pokemon({
+        image:"https://www.google.com/url?sa=i&url=%3A%2F%2Fwww.thegamer.com%2Ftag%2Fpokemon%2F&psig=AOvVaw2mRAPIURQWxIpo_bsRSrKI&ust=1728503015723000&source=images&cd=vfe&opi=89978449&ved=0CBQQjRxqFwoTCOipsvPF_4gDFQAAAAAdAAAAABAE",
+        name:"Not Found",
+        description: "Try Another Search",
+      
+      }
+    )
+    dataRow.appendChild(pokemon)
+    };
+  
+  
+  list.forEach((pokemonObj) => {
+    const pokemon = Pokemon(pokemonObj);
+    dataRow.appendChild(pokemon);
   }
-
+)}
+renderPokemon(arrayShuffle(data));
+doocument.addEventListener("keydown", (e) =>{
+  if (e.key==="/"){
+    e.preventDefault();
+    inputEl.focus();
+  }
+})
   function handleSearch(input){
-    const filteredPokemon = data.filter((pokemonObj)=>{
-     return pokemonObj.name.toLowerCase().includes(input)
-    });
+    const options = {
+      keys: ["name"],
+      threshold: 0.5,
+    };
+    const fuse = new Fuse(data, options);
+  
+    function performSearch() {
+      if (!input) return data;
+      const search = fuse.search(input);
+      return search.map((obj) => obj.item);
+    }
+    const filteredPokemon = performSearch();
     renderPokemon(filteredPokemon);
   }
-
-  inputE1.addEventListener("input",(e)=>{
-     handleSearch(e.target.value.trim().toLowerCase());
-     handleSearch(currentInput)
-    
-  })
-
-renderPokemon(arrayShuffle((data)));
+  
  
-
-// add slash to active search 
- document.addEventListener("keydown",(e)=>{
-   if(e.key === "/"){
-    e.preventDefault();
-    inputE1.focus();
-   }
- });
+  let debounceTimer;
+  inputEl.addEventListener("input", (e) => {
+    debounceTimer = setTimeout(() => {
+      handleSearch(e.target.value.trim().toLowerCase());
+      handleSearch(currentInput);
+    }, 500);
+  });
+  
