@@ -4,6 +4,15 @@ import "../scss/main.scss"
 import data from "./data.json"  
 import {Pokemon} from "./components/PokemonCard";
 
+
+interface Pokemon{
+  id:number;
+  name:string;
+  image:string;
+  description:string;
+  link:string;
+  abilities:string[];
+}
 const inputEl = document.querySelector("input") as HTMLInputElement;
 const dataRow = document.querySelector("[data-pokemon-row]") as HTMLDivElement;
 
@@ -64,7 +73,7 @@ document.addEventListener("keydown", (e:KeyboardEvent) =>{
     const target = e.target as HTMLInputElement
     debounceTimer = setTimeout(() => {
 
-      handleSearch(target.value.trim().toLowerCase());
+      const currentInput = (target.value.trim().toLowerCase());
       handleSearch(currentInput);
     }, 400);
   });
