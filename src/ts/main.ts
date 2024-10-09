@@ -1,5 +1,6 @@
 import arrayShuffle from "array-shuffle";
 import Fuse from "fuse.js";
+import "../scss/main.scss"
 import data from "./data.json"  
 import {Pokemon} from "./components/PokemonCard";
 
@@ -18,7 +19,7 @@ const dataRow = document.querySelector("[data-pokemon-row]")
     dataRow.textContent = "";
     if (!list.length){
       const pokemon = Pokemon({
-        image:"https://www.google.com/url?sa=i&url=%3A%2F%2Fwww.thegamer.com%2Ftag%2Fpokemon%2F&psig=AOvVaw2mRAPIURQWxIpo_bsRSrKI&ust=1728503015723000&source=images&cd=vfe&opi=89978449&ved=0CBQQjRxqFwoTCOipsvPF_4gDFQAAAAAdAAAAABAE",
+        image:"./assets/Pokemon-game-series.avif",
         name:"Not Found",
         description: "Try Another Search",
       
@@ -34,7 +35,8 @@ const dataRow = document.querySelector("[data-pokemon-row]")
   }
 )}
 renderPokemon(arrayShuffle(data));
-doocument.addEventListener("keydown", (e) =>{
+
+document.addEventListener("keydown", (e) =>{
   if (e.key==="/"){
     e.preventDefault();
     inputEl.focus();
@@ -62,6 +64,6 @@ doocument.addEventListener("keydown", (e) =>{
     debounceTimer = setTimeout(() => {
       handleSearch(e.target.value.trim().toLowerCase());
       handleSearch(currentInput);
-    }, 500);
+    }, 400);
   });
   

@@ -14,9 +14,8 @@ body{
 .card{
     height: 100%;
     transition: all ease 1s;
-}
-
-.card:hover{
-    transform:scale(1.1);
-    background: linear-gradient(120deg, #e0c3fc 0%, #8ec5fc 100%);
+    &:hover{
+        transform:scale(1.1);
+        background: linear-gradient(120deg, #e0c3fc 0%, #8ec5fc 100%);
+    }
 }
