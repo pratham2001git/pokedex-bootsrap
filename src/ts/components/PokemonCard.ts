@@ -1,10 +1,9 @@
 
-export function Pokemon(data){
+export function Pokemon(data):HTMLDivElement{
   const{name,link,description,image} = data
     const div = document .createElement("div");
     div.classList.add("col");
-    div.innerHTML = 
-               `<div class="card">
+    div.innerHTML = `<div class="card">
                  <img 
                  src="${image}"
                   class="card-img-top" 
