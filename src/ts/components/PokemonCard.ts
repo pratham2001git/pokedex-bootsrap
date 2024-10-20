@@ -1,4 +1,3 @@
-
 export function Pokemon(data):HTMLDivElement{
   const{name,link,description,image} = data
     const div = document .createElement("div");

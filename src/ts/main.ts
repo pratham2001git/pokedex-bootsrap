@@ -4,8 +4,8 @@ import "../scss/main.scss"
 import data from "./data.json"  
 import {Pokemon} from "./components/PokemonCard";
 
-
-interface Pokemon{
+// custom types
+interface pokemon{
   id:number;
   name:string;
   image:string;
@@ -28,14 +28,14 @@ const dataRow = document.querySelector("[data-pokemon-row]") as HTMLDivElement;
     dataRow.textContent = "";
     if (!list.length){
       const pokemon = Pokemon({
-        image:"./assets/Pokemon-game-series.avif",
+        image:"https://www.google.com/url?sa=i&url=https%3A%2F%2Fen.wikipedia.org%2Fwiki%2FPok%25C3%25A9mon&psig=AOvVaw1cF9Ny-trXU077yR5tAgd-&ust=1729503382208000&source=images&cd=vfe&opi=89978449&ved=0CBQQjRxqFwoTCLDAsqjUnIkDFQAAAAAdAAAAABAE",
         name:"Not Found",
         description: "Try Another Search",
       
       }
-    )
-    dataRow.appendChild(pokemon)
-    };
+    );
+    dataRow.appendChild(pokemon);
+    }
   
   
   list.forEach((pokemonObj) => {
